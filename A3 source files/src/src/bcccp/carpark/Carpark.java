@@ -61,6 +61,7 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public String getName() {
+		// Auto_generated stub
 		return carparkId;
 	}
 	
