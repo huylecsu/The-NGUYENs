@@ -52,6 +52,8 @@ public class Carpark implements ICarpark {
 	
 	
 	private void notifyObservers() {
+		// notifyCarparkEvent method notify the registers observer when the carpark is full and
+		// spaces become available
 		for (ICarparkObserver observer : observers) {
 			observer.notifyCarparkEvent();
 		}
