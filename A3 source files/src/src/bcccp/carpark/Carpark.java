@@ -43,7 +43,7 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public void deregister(ICarparkObserver observer) {
-		// Auto_generated stub
+		// remove observer as an entity to be notified 
 		if (observers.contains(observer)) {
 			observers.remove(observer);
 		}
@@ -61,13 +61,14 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public String getName() {
-		// Auto_generated stub
+		// return the carpark name
 		return carparkId;
 	}
 	
 	
 	
 	@Override
+	// Return a boolean indicating whether the carpark is full
 	public boolean isFull() {
 		return nParked + seasonTicketDAO.getNumberOfTickets() == capacity;
 	}
