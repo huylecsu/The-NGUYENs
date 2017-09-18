@@ -33,7 +33,7 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public void register(ICarparkObserver observer) {
-		// Auto_generated stub
+		// Registers observer as an entity 
 		if (!observers.contains(observer)) {
 			observers.add(observer);
 		}
