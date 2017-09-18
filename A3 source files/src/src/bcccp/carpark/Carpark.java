@@ -43,6 +43,7 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public void deregister(ICarparkObserver observer) {
+		// Auto_generated stub
 		if (observers.contains(observer)) {
 			observers.remove(observer);
 		}
