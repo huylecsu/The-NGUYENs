@@ -276,6 +276,10 @@ public class ExitController
 				if (adhocTicket != null && adhocTicket.isPaid()) {
 					setState(STATE.PROCESSED);
 				}
+				else if (adhocTicket != null && adhocTicket.overTime()) {
+					setState(STATE.EXTRACHARE);
+				}
+						
 				else {
 					ui.beep();
 					setState(STATE.REJECTED);						
