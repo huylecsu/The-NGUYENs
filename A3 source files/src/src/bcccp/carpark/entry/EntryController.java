@@ -13,7 +13,7 @@ public class EntryController
 				   ICarparkObserver,
 		           IEntryController {
 	
-	private enum STATE { IDLE, WAITING, FULL, VALIDATED, ISSUED, TAKEN, ENTERING, ENTERED, BLOCKED } 
+	private enum STATE { IDLE, WAITING, FULL, VALIDATED, ISSUED, TAKEN, ENTERING, ENTERED, BLOCKED, REJECT } 
 	
 	private STATE state_;
 	private STATE prevState_;
@@ -81,7 +81,7 @@ public class EntryController
 				setState(STATE.BLOCKED);
 			}
 			break;
-			
+		case REJECT:
 		case WAITING: 
 		case FULL: 
 		case VALIDATED: 
