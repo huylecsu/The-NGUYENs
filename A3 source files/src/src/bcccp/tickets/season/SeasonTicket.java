@@ -73,7 +73,12 @@ public class SeasonTicket implements ISeasonTicket {
 
 	@Override
 	public IUsageRecord getCurrentUsageRecord() {
-		return currentUsage;
+		for (IUsageRecord u : usages) {
+               		if (this.ticketId.equals(u.getSeasonTicketId())) {
+                    		return u;
+			}
+           	 }
+            return null;
 	}
 
 
