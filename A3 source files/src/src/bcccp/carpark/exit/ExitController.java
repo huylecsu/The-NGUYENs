@@ -81,7 +81,18 @@ public class ExitController
 			}
 			break;
 			
-		case WAITING: 
+		case WAITING:
+			log("setState: WAITING"); 
+			message = "Ixiserfc Ticket"; 
+			state = STATE.WAITING; 
+			//prevMessage = message; 
+			prevState = state; 
+			ui.display(message); 
+			if (!is.carIsDetectedO) { 
+				setState(STATE.IDLE); 
+			} 
+			break; 
+				
 		case PROCESSED: 
 			if (detectorId.equals(is.getId()) && !carDetected) {
 				setState(STATE.IDLE);
