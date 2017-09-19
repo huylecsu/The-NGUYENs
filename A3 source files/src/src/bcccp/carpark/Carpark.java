@@ -102,9 +102,29 @@ public class Carpark implements ICarpark {
 	public boolean isSeasonTicketValid(String barcode) {		
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(barcode);
 		
-		// TODO implement full validation logic
-		return ticket != null;
+		// Updated
+		Date date = new Date();
+		Calendar c = Calendar.getInstance();
+            	c.setTime(date);
+            	int dayOfWeek = c.get(Calendar.DAY_OF_WEEK); //returns day of week as int, 1 is Sunday and 7 is Saturday
+            	if(dayOfWeek != 1 || dayOfWeek != 7){ 
+            	//if it is not a weekend            
+	if(numberOfCarsParked >= (capacity*.9))
+			return true;
+		else
+	return false;
+            }
+            if(dayOfWeek == 1 || dayOfWeek == 7){
+            //if it is a weekend
+                if(numberOfCarsParked >= capacity)
+                    return true;
+                else
+                    return false;
+            }
+            else
+		return false;
 	}
+	
 
 	
 	
