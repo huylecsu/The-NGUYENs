@@ -52,7 +52,12 @@ public class SeasonTicket implements ISeasonTicket {
 
 	@Override
 	public boolean inUse() {
-		return currentUsage != null;
+		if (currentUsage.getStartTime() != 0 && currentUsage.getEndTime() == 0) {
+               		return true; 
+           	}
+           	else {
+                	return false;
+           	 }
 	}
 
 
