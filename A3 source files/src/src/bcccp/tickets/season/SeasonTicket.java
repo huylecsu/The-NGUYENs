@@ -21,7 +21,7 @@ public class SeasonTicket implements ISeasonTicket {
 		this.carparkId =carparkId;
 		this.startValidPeriod = startValidPeriod;
 		this.endValidPeriod = endValidPeriod;
-		
+		this.currentUsage = new UsageRecord(ticketId, System.currentTimeMillis());
 		usages = new ArrayList<IUsageRecord>();
 	}
 
