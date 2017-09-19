@@ -82,6 +82,14 @@ public class EntryController
 			}
 			break;
 		case REJECT:
+			if (detectorId.equals(outsideEntrySensor_.getId()) && !carDetected) {
+				setState(STATE.WAITING);
+			}
+			else if (detectorId.equals(insideEntrySensor_.getId()) && carDetected) {
+				setState(STATE.BLOCKED);
+			}
+			break;
+				
 		case WAITING: 
 		case FULL: 
 		case VALIDATED: 
