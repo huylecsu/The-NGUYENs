@@ -13,7 +13,7 @@ public class EntryController
 				   ICarparkObserver,
 		           IEntryController {
 	
-	private enum STATE { IDLE, WAITING, FULL, VALIDATED, ISSUED, TAKEN, ENTERING, ENTERED, BLOCKED } 
+	private enum STATE { IDLE, WAITING, FULL, VALIDATED, ISSUED, TAKEN, ENTERING, ENTERED, BLOCKED, REJECT } 
 	
 	private STATE state_;
 	private STATE prevState_;
@@ -81,7 +81,15 @@ public class EntryController
 				setState(STATE.BLOCKED);
 			}
 			break;
-			
+		case REJECT:
+			if (detectorId.equals(outsideEntrySensor_.getId()) && !carDetected) {
+				setState(STATE.WAITING);
+			}
+			else if (detectorId.equals(insideEntrySensor_.getId()) && carDetected) {
+				setState(STATE.BLOCKED);
+			}
+			break;
+				
 		case WAITING: 
 		case FULL: 
 		case VALIDATED: 

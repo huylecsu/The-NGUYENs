@@ -21,7 +21,7 @@ public class SeasonTicket implements ISeasonTicket {
 		this.carparkId =carparkId;
 		this.startValidPeriod = startValidPeriod;
 		this.endValidPeriod = endValidPeriod;
-		
+		this.currentUsage = new UsageRecord(ticketId, System.currentTimeMillis());
 		usages = new ArrayList<IUsageRecord>();
 	}
 
@@ -52,7 +52,12 @@ public class SeasonTicket implements ISeasonTicket {
 
 	@Override
 	public boolean inUse() {
-		return currentUsage != null;
+		if (currentUsage.getStartTime() != 0 && currentUsage.getEndTime() == 0) {
+               		return true; 
+           	}
+           	else {
+                	return false;
+           	 }
 	}
 
 
@@ -68,7 +73,12 @@ public class SeasonTicket implements ISeasonTicket {
 
 	@Override
 	public IUsageRecord getCurrentUsageRecord() {
-		return currentUsage;
+		for (IUsageRecord u : usages) {
+               		if (this.ticketId.equals(u.getSeasonTicketId())) {
+                    		return u;
+			}
+           	 }
+            return null;
 	}
 
 
