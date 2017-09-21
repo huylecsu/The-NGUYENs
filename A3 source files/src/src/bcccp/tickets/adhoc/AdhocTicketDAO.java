@@ -39,8 +39,9 @@ public class AdhocTicketDAO  implements IAdhocTicketDAO  {
 	
 	
 	@Override
-	public List<IAdhocTicket> getCurrentTickets() {		
-		return Collections.unmodifiableList(new ArrayList<IAdhocTicket>(currentTickets.values()));
+	public List<IAdhocTicket> getCurrentTickets() {
+		
+		return this.ticketList;
 	}
 
 
