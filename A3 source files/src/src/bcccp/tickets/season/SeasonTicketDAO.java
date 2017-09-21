@@ -30,7 +30,7 @@ public class SeasonTicketDAO implements ISeasonTicketDAO {
 	
 	
 	@Override
-	public void deregisterTicket(ISeasonTicket ticket) {
+	public void deregisterTicket(ISeasonTicket ticket) {  // Delete the data of ticket
 		if (currentTickets.containsKey(ticket.getId())) {
 			currentTickets.remove(ticket.getId());
 		}
