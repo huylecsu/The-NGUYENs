@@ -88,6 +88,16 @@ public class SeasonTicketDAO implements ISeasonTicketDAO {
 		}
 		return isValid;
 	}
+	
+	public boolean isSeasonTicketInUse(String ticketId) {
+		boolean isValid = false;
+		ISeasonTicket ticket = findTicketById(ticketId);
+		if (ticket == null) throw new RuntimeException("finaliseTicketUsage : no such ticket: " + ticketId);
+		if (isSeasonTicketValid(ticketId) && ticket.inUse()) {
+			isValid = true;
+		}
+		return isValid;
+	}
 }
 
 
