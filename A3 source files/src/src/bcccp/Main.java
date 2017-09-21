@@ -1,7 +1,7 @@
+
 package bcccp;
 
 import java.awt.EventQueue;
-
 import bcccp.carpark.CarSensor;
 import bcccp.carpark.Carpark;
 import bcccp.carpark.Gate;
@@ -45,37 +45,45 @@ public class Main {
 					Carpark carpark = new Carpark("Bathurst Chase", 5, adhocTicketDAO, seasonTicketDAO);
 					Carpark carpark2 = new Carpark("Anh Nguyen", 10, adhocTicketDAO, seasonTicketDAO);
 					
+										
 					ISeasonTicket t1 = new SeasonTicket("S1111","Bathurst Chase", 0L, 0L);
-					ISeasonTicket t2 = new SeasonTicket("S2222","Bathurst Chase", 1506021650740L, 1506021650740L);
+					ISeasonTicket t2 = new SeasonTicket("S2222","Bathurst Chase", 0L, 0L);
 					ISeasonTicket t3 = new SeasonTicket("test1","Anh Nguyen", 0L, 0L);
+					ISeasonTicket t4 = new SeasonTicket("test2","Anh Nguyen", 0L, 0L);
+					
 					
 					carpark.registerSeasonTicket(t1);
 					carpark.registerSeasonTicket(t2);
 					carpark2.registerSeasonTicket(t3);
+					carpark2.registerSeasonTicket(t4);
 					
 					//issue a ticket so that paystation can be tested
 					carpark.issueAdhocTicket();
 					carpark.recordAdhocTicketEntry();
 					carpark.recordSeasonTicketEntry(t1.getId());
+					carpark.recordSeasonTicketEntry(t2.getId());
 					
 					//issue a ticket for carpark2
 					carpark2.issueAdhocTicket();
-					carpark2.recordAdhocTicketEntry(t3.getId());
+					carpark2.recordAdhocTicketEntry();
+					carpark2.recordSeasonTicketEntry(t3.getId());
 					
 					IAdhocTicket ticket = carpark.issueAdhocTicket();
 					ticket.pay(System.currentTimeMillis(), 5.0f);
+					IAdhocTicket ticket2 = carpark2.issueAdhocTicket();
+					ticket2.pay(System.currentTimeMillis(), 5.0f);
 					
 					@SuppressWarnings("unused")
 					EntryController entryController = 
-							new EntryController(carpark, egate, eos, eis, eui);
+							new EntryController(carpark2, egate, eos, eis, eui);
 					
 					@SuppressWarnings("unused")
 					PaystationController payController = 
-							new PaystationController(carpark, pui);
+							new PaystationController(carpark2, pui);
 					
 					@SuppressWarnings("unused")
 					ExitController exitController = 
-					new ExitController(carpark, xgate, xis, xos, xui);
+					new ExitController(carpark2, xgate, xis, xos, xui);
 					
 					eos.setVisible(true);
 					egate.setVisible(true);
