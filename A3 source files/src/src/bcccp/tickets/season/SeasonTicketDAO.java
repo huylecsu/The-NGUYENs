@@ -70,10 +70,23 @@ public class SeasonTicketDAO implements ISeasonTicketDAO {
 		if (ticket == null) throw new RuntimeException("finaliseTicketUsage : no such ticket: " + ticketId);
 
 		long dateTime = System.currentTimeMillis();
-		ticket.endUsage(dateTime);
-		
-		
-		
+		ticket.endUsage(dateTime);		
+	}
+	
+	public boolean isSeasonTicketValid(String ticketId) {
+		boolean isValid = false;
+		ISeasonTicket ticket = findTicketById(ticketId);
+		if (ticket == null) throw new RuntimeException("finaliseTicketUsage : no such ticket: " + ticketId);
+		long nowInLong = System.currentTimeMillis();
+		if (nowInLong < ticket.getEndValidPeriod()) {
+			Calendar nowInDate = Calendar.getInstance();
+			Calendar endValidPeriodInDate = Calendar.getInstance();
+			endValidPeriodInDate.setTimeInMillis(ticket.getEndValidPeriod());
+			if (nowInDate.get(Calendar.DAY_OF_WEEK) > 1 && nowInDate.get(Calendar.DAY_OF_WEEK) < 7 && nowInDate.get(Calendar.HOUR_OF_DAY) >= 7 && nowInDate.get(Calendar.HOUR_OF_DAY) <= 19) {
+				isValid = true;
+			}
+		}
+		return isValid;
 	}
 }
 
