@@ -43,17 +43,24 @@ public class Main {
 					ISeasonTicketDAO seasonTicketDAO = new SeasonTicketDAO(new UsageRecordFactory());
 					
 					Carpark carpark = new Carpark("Bathurst Chase", 5, adhocTicketDAO, seasonTicketDAO);
+					Carpark carpark2 = new Carpark("Anh Nguyen", 10, adhocTicketDAO, seasonTicketDAO);
 					
 					ISeasonTicket t1 = new SeasonTicket("S1111","Bathurst Chase", 0L, 0L);
-					ISeasonTicket t2 = new SeasonTicket("S2222","Bathurst Chase", 0L, 0L);
+					ISeasonTicket t2 = new SeasonTicket("S2222","Bathurst Chase", 1506021650740L, 1506021650740L);
+					ISeasonTicket t3 = new SeasonTicket("test1","Anh Nguyen", 0L, 0L);
 					
 					carpark.registerSeasonTicket(t1);
 					carpark.registerSeasonTicket(t2);
+					carpark2.registerSeasonTicket(t3);
 					
 					//issue a ticket so that paystation can be tested
 					carpark.issueAdhocTicket();
 					carpark.recordAdhocTicketEntry();
 					carpark.recordSeasonTicketEntry(t1.getId());
+					
+					//issue a ticket for carpark2
+					carpark2.issueAdhocTicket();
+					carpark2.recordAdhocTicketEntry(t3.getId());
 					
 					IAdhocTicket ticket = carpark.issueAdhocTicket();
 					ticket.pay(System.currentTimeMillis(), 5.0f);
