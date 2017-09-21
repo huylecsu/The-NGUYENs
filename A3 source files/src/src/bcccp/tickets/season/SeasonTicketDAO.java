@@ -21,7 +21,7 @@ public class SeasonTicketDAO implements ISeasonTicketDAO {
 	
 	
 	@Override
-	public void registerTicket(ISeasonTicket ticket) {
+	public void registerTicket(ISeasonTicket ticket) { // Input the data of ticekt
 		if (!currentTickets.containsKey(ticket.getId())) {
 			currentTickets.put(ticket.getId(),ticket);
 		}
