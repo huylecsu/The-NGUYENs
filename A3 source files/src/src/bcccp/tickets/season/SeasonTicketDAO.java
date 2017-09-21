@@ -108,6 +108,15 @@ public class SeasonTicketDAO implements ISeasonTicketDAO {
 		IUsageRecord usage = factory.make(ticketId, datetime);
 		ticket.recordUsage(usage);		
 	}
+	
+	public void recordSeasonTicketExit(String ticketId) {
+		ISeasonTicket ticket = findTicketById(ticketId);
+		if (ticket == null) throw new RuntimeException("finaliseTicketUsage : no such ticket: " + ticketId);
+		if (ticket.inUse()) throw new RuntimeException("finaliseTicketUsage : ticket " + ticketId + " is in use");
+		
+		long dateTime = System.currentTimeMillis();
+		ticket.endUsage(dateTime);
+	}
 }
 
 
