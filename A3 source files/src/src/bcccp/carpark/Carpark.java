@@ -33,6 +33,7 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public void register(ICarparkObserver observer) {
+		// Registers observer as an entity 
 		if (!observers.contains(observer)) {
 			observers.add(observer);
 		}
@@ -42,6 +43,10 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public void deregister(ICarparkObserver observer) {
+ 
+		// remove observer as an entity to be notified 
+		// Auto_generated stub
+
 		if (observers.contains(observer)) {
 			observers.remove(observer);
 		}
@@ -50,6 +55,8 @@ public class Carpark implements ICarpark {
 	
 	
 	private void notifyObservers() {
+		// notifyCarparkEvent method notify the registers observer when the carpark is full and
+		// spaces become available
 		for (ICarparkObserver observer : observers) {
 			observer.notifyCarparkEvent();
 		}
@@ -59,12 +66,14 @@ public class Carpark implements ICarpark {
 	
 	@Override
 	public String getName() {
+		// return the carpark name
 		return carparkId;
 	}
 	
 	
 	
 	@Override
+	// Return a boolean indicating whether the carpark is full
 	public boolean isFull() {
 		return nParked + seasonTicketDAO.getNumberOfTickets() == capacity;
 	}
@@ -96,9 +105,29 @@ public class Carpark implements ICarpark {
 	public boolean isSeasonTicketValid(String barcode) {		
 		ISeasonTicket ticket = seasonTicketDAO.findTicketById(barcode);
 		
-		// TODO implement full validation logic
-		return ticket != null;
+		// Updated
+		Date date = new Date();
+		Calendar c = Calendar.getInstance();
+            	c.setTime(date);
+            	int dayOfWeek = c.get(Calendar.DAY_OF_WEEK); //returns day of week as int, 1 is Sunday and 7 is Saturday
+            	if(dayOfWeek != 1 || dayOfWeek != 7){ 
+            	//if it is not a weekend            
+	if(numberOfCarsParked >= (capacity*.9))
+			return true;
+		else
+	return false;
+            }
+            if(dayOfWeek == 1 || dayOfWeek == 7){
+            //if it is a weekend
+                if(numberOfCarsParked >= capacity)
+                    return true;
+                else
+                    return false;
+            }
+            else
+		return false;
 	}
+	
 
 	
 	

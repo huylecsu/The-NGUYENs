@@ -11,7 +11,7 @@ public class ExitController
 		implements ICarSensorResponder,
 		           IExitController {
 	
-	private enum STATE { IDLE, WAITING, PROCESSED, REJECTED, TAKEN, EXITING, EXITED, BLOCKED } 
+	private enum STATE { IDLE, WAITING, PROCESSED, REJECTED, TAKEN, EXTRACHARGE, EXITING, EXITED, BLOCKED } 
 	
 	private STATE state;
 	private STATE prevState;
@@ -81,7 +81,18 @@ public class ExitController
 			}
 			break;
 			
-		case WAITING: 
+		case WAITING:
+			log("setState: WAITING"); 
+			message = "Ixiserfc Ticket"; 
+			state = STATE.WAITING; 
+			//prevMessage = message; 
+			prevState = state; 
+			ui.display(message); 
+			if (!is.carIsDetectedO) { 
+				setState(STATE.IDLE); 
+			} 
+			break; 
+				
 		case PROCESSED: 
 			if (detectorId.equals(is.getId()) && !carDetected) {
 				setState(STATE.IDLE);
@@ -99,6 +110,16 @@ public class ExitController
 				setState(STATE.EXITING);
 			}
 			break;
+				
+		case EXTRACHARE:
+			if (detectorId.equals(is.getId()) && !carDetected) {
+				setState(STATE.BLOCKED);
+			}
+			else if (detectorId.equals(os.getId()) && carDetected) {
+				setState(STATE.EXITING);
+			}
+			break;	
+				
 			
 		case EXITING: 
 			if (detectorId.equals(is.getId()) && !carDetected) {
@@ -255,6 +276,10 @@ public class ExitController
 				if (adhocTicket != null && adhocTicket.isPaid()) {
 					setState(STATE.PROCESSED);
 				}
+				else if (adhocTicket != null && adhocTicket.overTime()) {
+					setState(STATE.EXTRACHARE);
+				}
+						
 				else {
 					ui.beep();
 					setState(STATE.REJECTED);						
