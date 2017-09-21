@@ -68,6 +68,30 @@ public class Main {
 					carpark2.recordAdhocTicketEntry();
 					carpark2.recordSeasonTicketEntry(t3.getId());
 					
+					if (carpark.isSeasonTicketValid("test3")) {
+						System.out.println("THE SEASON TICKET test3 IS A VALID TICKET\n");
+					} else {
+						System.out.println("THE SEASON TICKET test3 IS NOT A VALID TICKET\n");			
+					}
+					
+					if (carpark.isSeasonTicketValid("S1111")) {
+						System.out.println("THE SEASON TICKET S1111 IS A VALID TICKET\n");// check if S1111 is a valid ticket
+					}
+					
+					if (carpark.isSeasonTicketInUse(t1.getId())) {
+						System.out.println("THE SEASON TICKET "+t1.getId() + " IS IN USE\n");// check if S1111 is in use
+					} else {
+						System.out.println("THE SEASON TICKET "+t1.getId() + " IS NOT IN USE\n");
+					}
+					
+					carpark.recordSeasonTicketExit(t1.getId()); // the t1 has been exited
+					
+					if (carpark.isSeasonTicketInUse(t1.getId())) {
+						System.out.println("THE SEASON TICKET "+t1.getId() + " IS IN USE\n");// check if S1111 is in use
+					} else {
+						System.out.println("THE SEASON TICKET "+t1.getId() + " IS NOT IN USE\n");
+					}
+					
 					IAdhocTicket ticket = carpark.issueAdhocTicket();
 					ticket.pay(System.currentTimeMillis(), 5.0f);
 					IAdhocTicket ticket2 = carpark2.issueAdhocTicket();
