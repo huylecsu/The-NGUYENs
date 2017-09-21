@@ -15,6 +15,7 @@ public class SeasonTicket implements ISeasonTicket {
 	private long endValidPeriod;
 	
 	public SeasonTicket (String ticketId, String carparkId, long startValidPeriod, long endValidPeriod) {
+	//
             this.ticketId = ticketId;
             this.carparkId = carparkId;
             this.startValidPeriod = startValidPeriod;
