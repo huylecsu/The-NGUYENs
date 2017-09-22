@@ -108,7 +108,7 @@ public class ExitController
 				setState(STATE.TAKEN);
 			}
 			break;
-			
+			//Check if ID is valid, if valid = Exit Allowed
 		case EXITED: 
 			if (detectorId.equals(is.getId()) && carDetected) {
 				setState(STATE.EXITING);
