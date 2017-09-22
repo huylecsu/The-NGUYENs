@@ -178,19 +178,14 @@ public class Carpark implements ICarpark {
 	private void write(String text) {		
 		System.out.print(text);	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	public boolean isParkingSlotFree() {		
+		boolean isFree = false;		
+		int index = 0;		
+		while (!isFree && index < parking.length) {			
+			if (parking[index] == null) {				
+				isFree = true;			
+			}			
+				index++;		
+		}		
+		return isFree;
 }
