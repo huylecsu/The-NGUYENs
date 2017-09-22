@@ -46,7 +46,7 @@ public class CarSensor extends JFrame implements ICarSensor {
 		responders = new ArrayList<>();
 		setTitle(detectorId);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(x, y, 306, 223);
+		setBounds(x, y, 208,163);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
