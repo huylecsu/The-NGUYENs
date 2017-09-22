@@ -64,9 +64,15 @@ public class Carpark implements ICarpark {
 	
 	
 	
-	@Override
-	public boolean isFull() {
-		return nParked + seasonTicketDAO.getNumberOfTickets() == capacity;
+	public boolean isParkingFull() {
+		boolean isFull = true;
+		int i = 0;
+		int placesOfParking = parking.length;
+		while (isFull && i < placesOfParking) {
+			isFull = !isSlotEmpty(i);
+			i++;
+		}
+		return isFull;
 	}
 	
 	
