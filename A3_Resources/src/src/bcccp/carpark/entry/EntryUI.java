@@ -133,7 +133,10 @@ public class EntryUI extends JFrame implements IEntryUI {
 		btnNewButton_1.setBounds(10, 263, 285, 45);
 		panel_2.add(btnNewButton_1);
 	}
-
+	private boolean 
+		isSlotEmpty(int index) {		
+		return (parking[index] == null);	
+	}
 	
 	
 	@Override
