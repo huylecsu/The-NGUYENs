@@ -168,7 +168,16 @@ public class Carpark implements ICarpark {
 		return ticket.inUse();
 	}
 
-
+	private boolean isSlotEmpty(int index) {		
+		return (parking[index] == null);	}			
+	/**	 * Writes a string on the terminal.	 
+	* Write the given text on terminal. Cut down <code>System.out.print</code>	 
+	* to write on the terminal.	 * 	 
+	* @param text a string whitch will be written on the terminal.	 
+	*/	
+	private void write(String text) {		
+		System.out.print(text);	}
+}
 
 
 
